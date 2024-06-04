@@ -6,7 +6,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         //argumentoMain(args);
         flujoTeclado();
-        flujoTeclado();
+        //flujoTeclado();
         //flujoString();
 
 
