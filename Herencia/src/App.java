@@ -5,26 +5,27 @@ public class App {
     public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         //argumentoMain(args);
-        flujoTeclado();
+        //flujoTeclado();
         //flujoTeclado();
         //flujoString();
 
 
-        Persona    oP = new Persona();
-        Persona    oP2 = new Persona(null, null, null);
+        // Persona    oP = new Persona();
+        // Persona    oP2 = new Persona(null, null, null);
+        Cajero oC = new Cajero();
         Supervisor oS = new Supervisor();
         
-        oP.setCedula("12342");
-        oP.setNombre("Pepe");
-        oP.setApellido(null);
+        oC.setCedula("12342");
+        oC.setNombre("Pepe");
+        oC.setApellido(null);
 
-        System.out.println(oP.getCedula());
-        System.out.println(oP.getNombre());
-        System.out.println(oP.getApellido());
+        // System.out.println(oP.getCedula());
+        // System.out.println(oP.getNombre());
+        // System.out.println(oP.getApellido());
 
-        System.out.println(oP2.getCedula());
-        System.out.println(oP2.getNombre());
-        System.out.println(oP2.getApellido());
+        System.out.println(oC.getCedula());
+        System.out.println(oC.getNombre());
+        System.out.println(oC.getApellido());
     }
 
     private static void flujoString() {

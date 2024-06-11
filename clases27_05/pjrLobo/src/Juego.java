@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Juego {
     public Jugador      usuario;
     private String      barca;
@@ -16,15 +18,67 @@ public class Juego {
         this.vikingoEstaIzq = true;
     }
 
-    public boolean jugarLobito(){
-        while (mostrarMenu());
-        return true;
+    public void jugarLobito(){
+        System.out.println("Bienvenido al juego de 'El Lobito y el Vikingo'");
+        if ( !usuario.login())
+            System.exit(0);        
+        do {
+            short opcMenu = (mostrarMenu());
+    
+            String individuo = " ";
+            if (vikingoEstaIzq){
+                individuo = ladoIzq [opcMenu];
+                ladoIzq [opcMenu] = " ";
+            }
+            else{
+                individuo = ladoDer [opcMenu];
+                ladoDer [opcMenu] = " ";
+            }
+
+            moverBarca(individuo);
+            vikingoEstaIzq = !vikingoEstaIzq;
+
+            if (vikingoEstaIzq){
+                ladoIzq [opcMenu] = individuo;
+                setBarcaRio(1, " ");
+            }
+            else{
+                ladoDer [opcMenu] = individuo;
+                setBarcaRio(rio.length(), " ");
+            }
+
+            verificarReglas();
+        } while (true);
     }
 
-    public boolean mostrarMenu(){
+    private void verificarReglas(){
+        String msg = "";
+
+        //Reglas con las que se pierde el juego
+        if(vikingoEstaIzq){
+            if(ladoDer[1].equals("L") && ladoDer[2].equals("C"))
+                msg += "\n Marcho la Caperucia";
+            if(ladoDer[2].equals("C") && ladoDer[3].equals("U"))
+                msg += "\n Marcharon las uvas";
+        }else{
+            if(ladoDer[1].equals("L") && ladoDer[2].equals("C"))
+                msg += "\n Marcho la Caperucia";
+            if(ladoDer[2].equals("C") && ladoDer[3].equals("U"))
+                msg += "\n Marcharon las uvas";
+        }
+
+        if( ladoDer[1].equals("L") && ladoDer[2].equals("C") && ladoDer[3].equals("U"))
+            msg = "\n Lo lograste campeon...!";
+
+        if (!msg.isEmpty()) {
+            System.out.println(msg);
+            System.exit(0);
+        }
+    }
+
+    public short mostrarMenu(){
         int opc=-1;
-        System.out.println();
-        System.out.println(  " ".repeat(10) + barca + rio);
+        //System.out.println(  " ".repeat(10) + barca + rio);
         System.out.println(  "\n 0. Vikingo va solo "
                             +"\n 1. Lobo            "
                             +"\n 2. Capericita      "
@@ -33,22 +87,26 @@ public class Juego {
         do {
             try {
                 opc=-1;
+                String personaje = "";
                 System.out.println("[+] Ingresa una opc: ");
                 opc = App.sc.nextInt();
+                // verificar que exista personaje
+                personaje   = (vikingoEstaIzq)
+                            ? ladoIzq [opc]
+                            : ladoDer [opc];
+
+                if(personaje.trim().isEmpty() && opc > 0){
+                    opc=-1;
+                    System.out.println("No existe ese personaje en el lado que este la barca");
+                }
+
                 if (opc == 4) {
                     System.out.println("Te vere pronto ... cobarde ..!");
                     System.exit(0);
                 }
             } catch (Exception e) {App.sc.next(); }
         } while (opc>=4 || opc<0);
-        //opc 0,1,2,3
-        String individuo = " ";
-        individuo   = (vikingoEstaIzq)
-                    ? ladoIzq [opc]
-                    : ladoDer [opc];
-        moverBarca(individuo);
-        vikingoEstaIzq = !vikingoEstaIzq;
-        return true;
+        return (short) opc;
     }
 
     public void moverBarca(String individuo){
@@ -65,13 +123,17 @@ public class Juego {
     }
 
     private void setBarcaRio(int posicionBarca, String individuo) {
+        String personajeIzq = Arrays.toString(ladoIzq);
+        String personajeDer = Arrays.toString(ladoDer);
         String rioBarca =     "\r"
+                            + personajeIzq 
                             + ".".repeat(posicionBarca) 
                             + barca .replace("?", individuo)
-                            + ".".repeat(rio.length()-posicionBarca);
+                            + ".".repeat(rio.length()-posicionBarca)
+                            + personajeDer;
         System.out.print(rioBarca);
         try {
-            Thread.sleep(500);
+            Thread.sleep(60);
         } catch (InterruptedException e) {}
     }
 }

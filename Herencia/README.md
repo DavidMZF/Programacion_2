@@ -48,5 +48,41 @@ public class Perro(){
     private string nombre = "Firulais"  \\Esta mal no se define
 }
 
-### Tareas 
-/Revisar secuancias de escape
+### Relaciones
+
+#### Asociacion
+
+ propietario -----> Mascota
+ Un propietario tiene una mascota
+
+ propietario ----P> Mascota
+
+    Public class Propietario {
+    
+        Private P;
+    }
+
+    
+
+### Relacion, implementacion y interfaces.
+#### Interfaces
+            \-> Agrega comportamientos.
+            \-> (Propiedades en algunos casos.)
+            \-> No se instancean.
+            \-> No se heredan.
+
+    Comienza con i
+    Debe ser abstracta y publica
+    Solo hace acciones
+
+Ejemplo:
+    
+public interface Actor().
+
+i comportamiento natural
+Simbolo
+
+---->
+
+## fsd
+No se puede tener 2 padres

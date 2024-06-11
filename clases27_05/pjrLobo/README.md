@@ -9,3 +9,6 @@ No se clona y solo ocupa un espacio de memoria.
 ### Dinamico
 
 Permite clonar las clases.
+
+## Packetes
+
