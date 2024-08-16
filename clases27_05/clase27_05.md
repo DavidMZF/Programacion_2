@@ -4,17 +4,18 @@
 
 1986 Jacobson Ivar, primero en usar.
 
-Desarrollan la etaoa inicial del desarrolo.
+Busca desarrollar la etapa inicial de un proyecto:
 
 - Especificar el contexto del sistema
 - Capturar los requisiitos de  un sistema
 - Validar una arquitectura de sitemas
-
 - Identifica los componentes principales del sistema
 - Actor
 
 Uso ( ______ )  ( ______> )
+
 Include (---->) la accion no se corta
+
 Extend (<-----) agregar acciones, caso excepcional.
 
 (<----------)
